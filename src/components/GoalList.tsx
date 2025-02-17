@@ -19,7 +19,7 @@ function GoalList({goalList, setGoals}: GoalListProps) {
 
     return (
         <>
-            <ul className={"goal-list"}>
+            <ul className={"goal-list container"}>
                 {goalList.map((goal,index) => (
                     <li key={goal.title+goal.description+index} className={"goal-list__item"}>
                         <div className="goal-list__text-wrapper">
