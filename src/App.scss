@@ -1,20 +1,39 @@
-.goal-list{
-    background-color: rgba(183, 131, 221, 0.29);
+@mixin fluid-text($min, $max) {
+  font-size: clamp(#{$min}px, #{$max / 1920 * 100}vw, #{$max}px);
+}
+
+.button{
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    border-radius: 12px;
-    padding: 20px;
-    max-width: 400px;
-    width: 80%;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
-.goal-list:empty{
+.container{
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(183, 131, 221, 0.29);
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 80%;
+  overflow-wrap: break-word;
+}
+
+.goal-list {
+
+
+  padding: 20px;
+
+
+  &:empty {
     display: none;
-}
+  }
 
-.goal-list__item{
+  &__item {
     list-style-type: none;
     background-color: #e3c79c;
     display: flex;
@@ -25,68 +44,58 @@
     padding: 10px;
     width: 50vw;
     max-width: 80%;
+  }
 
-}
-
-.goal-list__text-wrapper{
+  &__text-wrapper {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     max-width: 80%;
     overflow-wrap: break-word;
-}
+  }
 
-.goal-list__title{
+  &__title {
     font-weight: bold;
-    font-size: clamp(10px, 2vw, 16px);
+    @include fluid-text(10, 20);
     margin-bottom: 3px;
     color: #6e5380;
-}
+  }
 
-.goal-list__description{
-    font-size: clamp(8px, 1.5vw, 14px);
+  &__description {
+    @include fluid-text(8, 18);
     color: rgba(110, 83, 128, 0.45);
-}
+  }
 
-.goal-list__delete-button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &__delete-button {
+
     height: 16px;
     width: 16px;
-    border: none;
-    cursor: pointer;
     margin-right: 10px;
     background-color: rgba(183, 131, 221, 0.29);
     border-radius: 5px;
     flex-shrink: 0;
-    transition:  0.3s ease-in-out;
-}
-.goal-list__delete-button:hover{
-    background-color: rgba(142, 99, 171, 0.29);
-    scale: 1.2;
-}
+    transition: 0.3s ease-in-out;
 
-.delete-button__svg-cross{
+    &:hover {
+      background-color: rgba(142, 99, 171, 0.29);
+      scale: 1.2;
+    }
+  }
+
+  &__delete-button-icon {
     width: 10px;
     height: 10px
+  }
 }
 
-.goal-list__form{
-    margin: 0 0 16px;
-    background-color: rgba(183, 131, 221, 0.29);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    border-radius: 12px;
-    padding: 16px;
-    max-width: 400px;
-    width: 80%;
-    overflow-wrap: break-word
-}
+.goals-form {
+  margin: 0 0 16px;
 
-.goal-list__input{
+
+  padding: 16px;
+  overflow-wrap: break-word;
+
+  &__input {
     width: 50vw;
     max-width: 80%;
     padding: 8px;
@@ -94,40 +103,38 @@
     border-radius: 10px;
     background-color: #e3c79c;
     color: #300041;
-    font-size: clamp(10px, 2vw, 15px);
-}
+    @include fluid-text(10, 15);
 
-.goal-list__input:focus{
-    outline: solid 2px #aa7ab8;
-}
-
-.goal-list__add-button{
-    border: none;
-    background-color: rgba(255, 204, 228, 0.55);
-    color: rgba(110, 83, 128);
-    width: 50vw;
-    max-width: 80%;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: clamp(10px, 2vw, 17px);
-    cursor: pointer;
-    transition:  0.3s ease-in-out;
-}
-.goal-list__add-button:hover{
-    background-color: rgba(200, 157, 181, 0.59);
-}
-
-@media (max-width: 625px) {
-
-    .goal-list__delete-button{
-        height: 12px;
-        width: 12px;
-        border-radius: 4px;
+    &:focus {
+      outline: solid 2px #aa7ab8;
     }
+  }
+    &__add-button{
+        background-color: rgba(255, 204, 228, 0.55);
+        color: rgba(110, 83, 128);
+        width: 50vw;
+        max-width: 80%;
+        padding: 10px;
+        font-weight: bold;
+        @include fluid-text(10, 17);
+        transition: background-color 0.3s;
 
-    .delete-button__svg-cross{
-        width: 6px;
-        height: 6px
+        &:hover {
+            background-color: rgba(200, 157, 181, 0.59);
+        }
     }
 }
+
+  @media (max-width: 625px) {
+
+      .goals-form__delete-button {
+          height: 12px;
+          width: 12px;
+          border-radius: 4px;
+      }
+
+      .goals-form__delete-button-icon {
+          width: 6px;
+          height: 6px
+      }
+  }
