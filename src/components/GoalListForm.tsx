@@ -1,5 +1,5 @@
-import {FormEvent, useState} from "react";
 import * as React from "react";
+import {FormEvent, useState} from "react";
 
 interface Goal {
     title: string;
@@ -11,10 +11,10 @@ interface GoalListFormProps {
 }
 
 function GoalListForm({setGoals}: GoalListFormProps) {
-    const [changeTitle,setChangeTitle] = useState("")
-    const [changeDescription,setChangeDescription] = useState("")
+    const [changeTitle, setChangeTitle] = useState("")
+    const [changeDescription, setChangeDescription] = useState("")
 
-    const handleAddItem =( event:FormEvent) => {
+    const handleAddItem = (event: FormEvent) => {
         event.preventDefault()
 
         if (!(changeTitle === "" || changeDescription === "")) {
@@ -25,8 +25,7 @@ function GoalListForm({setGoals}: GoalListFormProps) {
             setGoals(prev => [...prev, newGoal]);
             setChangeTitle("")
             setChangeDescription("")
-        }
-        else {
+        } else {
             return alert("Please enter a title and description")
         }
 
@@ -34,22 +33,22 @@ function GoalListForm({setGoals}: GoalListFormProps) {
 
     return (
         <>
-            <form className={"goal-list__form"} onSubmit={handleAddItem}>
+            <form className={"goals-form container"} onSubmit={handleAddItem}>
                 <input
-                    className={"goal-list__input"}
+                    className={"goals-form__input"}
                     type="text"
                     placeholder="Enter Title"
                     value={changeTitle}
                     onChange={(e) => setChangeTitle(e.target.value)}
                 />
                 <input
-                    className={"goal-list__input"}
+                    className={"goals-form__input"}
                     type="text"
                     placeholder="Enter Description"
                     value={changeDescription}
                     onChange={(e) => setChangeDescription(e.target.value)}
                 />
-                <button className={"goal-list__add-button"} type={"submit"}>Add new goal</button>
+                <button className={"button goals-form__add-button"} type={"submit"}>Add new goal</button>
             </form>
         </>
     )
